@@ -1,0 +1,15 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+FILE *file;
+char ch[300000][1000];
+int mass[1000][1000];
+int x,y,i,h,j;
+
+int Xmin,Xmax,Yup,Ydown;
+float cx,cy;
+
+void // неосновные ф-ии
+
+int main(int argc, char *argv[])
