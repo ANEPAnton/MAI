@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 		c=sizereceive(b);
 		image *img=new image(c[0]+1,c[1]+1);
 		img->setpoints(b);
-		cout<<"Значение радиуса"<<endl<<r<<endl;
+		cout<<"Значение радиуса:"<<endl<<r<<endl;
 
 		vector<int*> object;
 		object=img->getobject(r,0);
@@ -61,9 +61,9 @@ int* centerofmass(vector<int*> object)
 	return a;
   }
 
-vector<int*> pointreceive( char* filename){
+vector<int*> pointreceive( char* Massive){
 	vector<int*> b;
-	ifstream f(filename);
+	ifstream f(Massive);
 	int x,y;
 	int *a;
 	
