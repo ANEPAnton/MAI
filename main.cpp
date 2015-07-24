@@ -6,18 +6,18 @@
 
 using namespace std;
 
-int centerofmass();
-vector<int> pointreceive();
-int sizereceive();
+int* centerofmass();
+vector<int*> pointreceive();
+int* sizereceive();
 void imagereference();
 void imageresearch();
 
 
 int main(int argc, char *argv[])
 	{
-		int centerofmass();
-		vector<int> pointreceive();
-		int sizereceive();
+		int* centerofmass();
+		vector<int*> pointreceive();
+		int* sizereceive();
 		void imagereference();
 		void imageresearch();
 		
