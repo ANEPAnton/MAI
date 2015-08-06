@@ -39,7 +39,7 @@ void Sort() { //Sort проверяет наличие точек рядом с 
 	for(j=1;j<My;j++) { // По строкам
 		for(i=1;i<Mx;i++) { // По столбцам
 			// вокруг одной точки проверяем 8 точек
-			if (Mass[i+1][j-1]==1) a++;
+			if (Mass[i+1][j-1]==1) a++;// а задаёт кол-во проверяемых точек
 			if (Mass[i+1][j]==1) a++;
 			if (Mass[i+1][j+1]==1) a++;
 			if (Mass[i][j-1]==1) a++;
@@ -105,7 +105,8 @@ void Image() {//всё для вывода картинки
 		for(i=0;i<Mx;i++) {
 			if (SMass[i][j]==1) printf("0 0 0 ");
 			else if (SMass[i][j]==2) printf("255 0 0 ");
-			else if (SMass[i][j]==3) printf("0 255 0 ");
+			else if (SMass[i][j]==3) printf("255 255 0 ");
+			else if (SMass[i][j]==4) printf("255 255 0 ");
 			else printf("255 255 255 ");
 		}
 		printf("\n");
