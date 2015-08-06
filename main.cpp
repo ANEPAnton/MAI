@@ -1,6 +1,6 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
 
 int Mx,My,MinX,MinY,MaxX,MaxY;
 int Mass[500][500];
@@ -82,6 +82,8 @@ void CenterOfMass() {
 
 void Print() {
 	int i,j;
+	printf("\nPloshad' s iskomimi to4kami: X=%d, Y=%d\n\n",MaxX-MinX+1,MaxY-MinY+1);
+
 	for(j=0;j<My;j++) {
 		for(i=0;i<Mx;i++) {
 			if (SMass[i][j]==1) printf("O");
@@ -92,8 +94,7 @@ void Print() {
 		}
 		printf("\n");
 	}
-	printf("\nPloshad' s iskomimi to4kami =");
-	printf("\nMx=%d\nMy=%d\n",MaxX-MinX+1,MaxY-MinY+1);
+
 }
 
 void Image() {//всё для вывода картинки
@@ -133,4 +134,3 @@ int main(int argc, char *argv[]) {//argv - сами аргументы, argv 0 -
 	if (argc==2)
 	Image();
 }
-
