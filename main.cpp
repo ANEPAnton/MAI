@@ -11,8 +11,8 @@ FILE *massive;
 void GetValues() {
 	int h;
 	h=1;
-	while (fgets(ch[h], 500, massive)) { // берёт 500 символов из файла и заталкивает в переменную ch. Он не берёт одни и теже символы
-		h++;//заменяет h=1 на h=2 и т.д, когда заканчиваются символы, while заканчивается.
+	while (fgets(ch[h], 500, massive)) {
+		h++;
 	}
 }
 
@@ -20,26 +20,26 @@ void Convert() {
 	int x,d,y;
 	d=1;
 	char *buf;
-	buf=strtok(ch[1], " \n");//strtok разбивает координаты на два числа
-	while (buf!=NULL){//буфер
-		if (d==1){Mx=atoi(buf); d++;}//atoi переводит char в int
-		else {My=atoi(buf); d=1;}// повторный заход
-		buf=strtok(NULL, " \n");// ch1 задаёт рамки массива(максимальные значения массива, длина и высота картинки)
+	buf=strtok(ch[1], " \n");
+	while (buf!=NULL){
+		if (d==1){Mx=atoi(buf); d++;}
+		else {My=atoi(buf); d=1;}
+		buf=strtok(NULL, " \n");
 	}
 	buf=strtok(ch[2], " \n");
 	while (buf!=NULL){
 		if (d==1){x=atoi(buf); d++;}
 		else {y=atoi(buf); Mass[x][y]=1; d=1;}
-		buf=strtok(NULL, " \n");// ch2 хранит все координаты точек в массиве
+		buf=strtok(NULL, " \n");
 	}
 }
 
-void Sort() { //Sort проверяет наличие точек рядом с другими точками
+void Sort() {
 	int i,j,a;
-	for(j=1;j<My;j++) { // По строкам
-		for(i=1;i<Mx;i++) { // По столбцам
-			// вокруг одной точки проверяем 8 точек
-			if (Mass[i+1][j-1]==1) a++;// а задаёт кол-во проверяемых точек
+	for(j=1;j<My;j++) {
+		for(i=1;i<Mx;i++) {
+
+			if (Mass[i+1][j-1]==1) a++;
 			if (Mass[i+1][j]==1) a++;
 			if (Mass[i+1][j+1]==1) a++;
 			if (Mass[i][j-1]==1) a++;
@@ -47,27 +47,26 @@ void Sort() { //Sort проверяет наличие точек рядом с 
 			if (Mass[i-1][j-1]==1) a++;
 			if (Mass[i-1][j]==1) a++;
 			if (Mass[i-1][j+1]==1) a++;
-			//Проверка:
-			if (a>=2) SMass[i][j] = Mass[i][j];//SMass - массив из нужных точек, Mass - массив всех точек
+
+			if (a>=2) SMass[i][j] = Mass[i][j];
 			if (SMass[i][j]==1) {
-                // Далее задаются переменные для описания границ рамки нужных точек
-				if (i>MaxX) MaxX=i;//максимальные точки рамки
+				if (i>MaxX) MaxX=i;
 				if (j>MaxY) MaxY=j;
-				if (MinX==0 || i<MinX) MinX=i;//минимальные точки
+				if (MinX==0 || i<MinX) MinX=i;
                 if (MinY==0 || i<MinY) MinY=j;
 				}
-			a=0;//сбрасывает значение а, чтобы мы могли определять следующую точку
+			a=0;
 		}
 	}
 }
 
-void Contour() {//рисует на сетке квадратик вокруг точек(рамку)
+void Contour() {
 	int i;
-	for(i=MinX-1;i<=MaxX+1;i++) {//строит стороны по x
+	for(i=MinX-1;i<=MaxX+1;i++) {
 		SMass[i][MinY-1]=4;
 		SMass[i][MaxY+1]=4;
 	}
-	for(i=MinY-1;i<=MaxY+1;i++) {//строит стороны по y
+	for(i=MinY-1;i<=MaxY+1;i++) {
 		SMass[MinX-1][i]=3;
 		SMass[MaxX+1][i]=3;
 	}
@@ -97,11 +96,11 @@ void Print() {
 
 }
 
-void Image() {//всё для вывода картинки
+void Image() {
 	int i,j;
-	printf("P3\n");//цветная картинка
-	printf("%d %d\n",Mx,My);//размеры
-	printf("255\n");//максимальное значение оттенков
+	printf("P3\n");
+	printf("%d %d\n",Mx,My);
+	printf("255\n");
 	for(j=0;j<My;j++) {
 		for(i=0;i<Mx;i++) {
 			if (SMass[i][j]==1) printf("0 0 0 ");
@@ -114,14 +113,14 @@ void Image() {//всё для вывода картинки
 	}
 }
 
-int main(int argc, char *argv[]) {//argv - сами аргументы, argv 0 - прога(gcc), argv 1 - путь к файлику, argv 2 - единичка
-	if (argc>3) {  //argc(счётчик) количество аргументов,1 аргумент - прога, 2 аргумента - прога+путь к файлу, 3 - прога+путь к файлу+ символ(единичка в codeblocks)
-		printf("Slishkom mnogo argumentov!\n");//Слишком много аргументов
+int main(int argc, char *argv[]) {
+	if (argc>3) {
+		printf("Slishkom mnogo argumentov!\n");
 		exit(0);
 	}
-	massive=fopen(argv[1], "r");// путь к файлику, fopen открывает файл по пути с разрешением только для чтения "r" и переменная File хранит путь к себе
-	if (massive==NULL) { // будет NULL если не открыл
-		printf("Oshibka otkritiya izobrajenia\n"); //Не удалось открыть изображение
+	massive=fopen(argv[1], "r");
+	if (massive==NULL) {
+		printf("Oshibka otkritiya izobrajenia\n");
 		exit(1);
 	}
 	GetValues();
